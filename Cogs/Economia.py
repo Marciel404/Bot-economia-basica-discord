@@ -7,7 +7,7 @@ class Economia(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(aliases = ['ajuda'])
     async def _help(self, ctx):
 
         Economia = discord.Embed(title = 'Meus comandos',
@@ -87,7 +87,7 @@ class Economia(commands.Cog):
         else:
             await ctx.send(f'Você não tem permissão para usar esse comando {ctx.author}')
 
-    @commands.command()
+    @commands.command(aliases = ['bal'])
     async def _Carteira(self, ctx, membro: discord.Member = None):
 
             if membro == None:
@@ -111,7 +111,7 @@ class Economia(commands.Cog):
 
                 await ctx.send(embed = em)
 
-    @commands.command()
+    @commands.command(aliases = ['rolar'])
     async def _beg(self, ctx):
             await open_account(ctx.author)
 
@@ -186,7 +186,7 @@ class Economia(commands.Cog):
                 await update_bank(ctx.author,-1*dindin)
                 await ctx.reply(f'Você perdeu {dindin} edinhos')
 
-    @commands.command()
+    @commands.command(aliases = ['ccap'])
     async def _Caraoucoroaap(self, ctx, edinhos = int, escolha = None):
             await open_account(ctx.author)
 
