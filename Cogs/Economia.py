@@ -3,11 +3,13 @@ import random
 import discord
 from discord.ext import commands
 
+#Se quiser mudar o nomr da moeda você rola até lá em baixo e muda de "Edinhos" para o nome desejado
+
 class Economia(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(aliases = ['ajuda'])
+    @commands.command(aliases = ['ajuda']) #Comando de ajuda
     async def _help(self, ctx):
 
         Economia = discord.Embed(title = 'Meus comandos',
@@ -28,10 +30,10 @@ class Economia(commands.Cog):
 
         await ctx.send(embed = Economia)
 
-    @commands.command(aliases = ['SetE', 'GiveEdinho', 'giveE', 'Se'])
+    @commands.command(aliases = ['SetE', 'GiveEdinho', 'giveE', 'Se']) #Da dinheiro para uma pessoa
     async def SetEdinho(self, ctx, id:int, *, dindin = 0):
         
-        if ctx.message.author.id == 'Id DO Dono':
+        if ctx.message.author.id == 'Id DO Dono': #Id do dono do bot
 
             if dindin == 0:
                 await ctx.send(f'Nenhum edinho foi setado para <@{id}>')
@@ -60,10 +62,10 @@ class Economia(commands.Cog):
         else:
             await ctx.send(f'Você não tem permissão para usar esse comando {ctx.author.mention}')
 
-    @commands.command(aliases = ['RemoveE', 'RmvE'])
+    @commands.command(aliases = ['RemoveE', 'RmvE']) #Remove dinheiro de um membro
     async def RemoveEdinhos(self, ctx, id:int, *, dindin = 0):
 
-        if ctx.message.author.id == 'ID DO DONO':
+        if ctx.message.author.id == 'ID DO DONO': #id do dono do bot
 
             if dindin == 0:
                 await ctx.send(f'Nenhum edinho foi Removido para <@{id}>')
@@ -87,7 +89,7 @@ class Economia(commands.Cog):
         else:
             await ctx.send(f'Você não tem permissão para usar esse comando {ctx.author}')
 
-    @commands.command(aliases = ['bal'])
+    @commands.command(aliases = ['bal']) #mostra o saldo de um membro
     async def _Carteira(self, ctx, membro: discord.Member = None):
 
             if membro == None:
@@ -111,7 +113,7 @@ class Economia(commands.Cog):
 
                 await ctx.send(embed = em)
 
-    @commands.command(aliases = ['rolar'])
+    @commands.command(aliases = ['rolar']) #ganhar de 0 a 2000 moedas
     async def _beg(self, ctx):
             await open_account(ctx.author)
 
@@ -128,7 +130,7 @@ class Economia(commands.Cog):
             with open('mainbank.json', 'w') as f:
                 json.dump(users,f)
 
-    @commands.command()
+    @commands.command() #tansfere dinheiro para outra pessaoa
     async def _Transferir(self, ctx, membro: discord.Member, edinhos = None):
             await open_account(ctx.author)
             await open_account(membro)
@@ -151,7 +153,7 @@ class Economia(commands.Cog):
             await update_bank(membro,dindin)
             await ctx.reply(f'Voce transferiu {dindin} edinhos')
 
-    @commands.command()
+    @commands.command() #aposta dinheiro na loteria, quadriplica o dinheiro
     async def _loteria(self, ctx, edinhos = None):
             await open_account(ctx.author)
 
@@ -186,7 +188,7 @@ class Economia(commands.Cog):
                 await update_bank(ctx.author,-1*dindin)
                 await ctx.reply(f'Você perdeu {dindin} edinhos')
 
-    @commands.command(aliases = ['ccap'])
+    @commands.command(aliases = ['ccap']) #aposta dinheiro no cara ou coroa
     async def _Caraoucoroaap(self, ctx, edinhos = int, escolha = None):
             await open_account(ctx.author)
 
@@ -220,7 +222,7 @@ class Economia(commands.Cog):
             with open('mainbank.json', 'w') as f:
                 json.dump(users,f)
 
-    @commands.command()
+    @commands.command() #mostra o rank de dinheiro do bot
     async def _edinhostop(self, ctx):
 
         users = await get_bank_data()
