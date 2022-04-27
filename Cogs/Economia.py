@@ -7,7 +7,6 @@ class Economia(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-
     @commands.command()
     async def _help(self, ctx):
 
